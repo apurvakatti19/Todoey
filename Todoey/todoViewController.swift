@@ -11,7 +11,7 @@ import UIKit
 class todoViewController: UITableViewController
 {
 
-    let item_array = ["hello","apurva","atharv"]
+    var item_array = ["hello","apurva","atharv"]
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return item_array.count
@@ -51,6 +51,33 @@ class todoViewController: UITableViewController
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-
+    @IBAction func additems(_ sender: UIBarButtonItem)
+    {
+        
+        var textTemp = UITextField()
+        
+        let alert = UIAlertController.init(title: "add new item to list", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "add item", style: .default)
+        { (action) in
+            self.item_array.append(textTemp.text!)
+            
+            self.tableView.reloadData()
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "add new item"
+            textTemp = alertTextField
+            
+           
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
+        
+        
+    }
+    
 }
 
